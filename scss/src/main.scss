@@ -1,0 +1,400 @@
+// main.scss
+/* main.css */
+/* 화성행궁 야간개장 사이트 */
+/* 메인페이지 */
+
+
+@import '../setting/color';
+@import '../setting/mixin';
+
+
+#wrap {
+	width: 100%; height: 100%;
+	margin: auto;
+}
+
+#headBox {
+	position: fixed; z-index:100;
+	width: 100%; height: 80px;
+	padding: 10px 30px; box-sizing: border-box;
+	background-color: rgba(22, 20, 17,0);
+	color: $white;
+	
+	h1 {
+		float:left;
+		width: 100px; height: 50px;
+		margin-top: 5px;
+		// background-color: $white;
+		@include Img($i:'logo_white.svg', $s:contain);
+
+		a {display:block; width: 100%; height:100%;}
+	}
+
+	#gnbBox {
+		float:right;
+		width: 500px; height: 50px;
+		> ul {
+			width: 100%; height: 100%;
+		} 
+		> ul li {
+			position: relative;
+			float:left; 
+			width: 33.333333%; height: 100%;
+			text-align: center;
+			line-height: 50px; 
+			font-size: 1rem;
+			text-shadow: 0rem 0rem 0.3rem $black;
+			a {display:block; width: 100%; height:100%;}
+		}
+		> ul li:after {
+			content: "";
+			position: absolute; bottom: 0; left:0; right:0;
+			margin:auto;
+			width: 0%; height: 3px;
+			background-color:$white;
+			transition: all 200ms ease;
+		}
+		ul li.active:after {
+			width: 60%;
+		}
+	}
+	
+	//end-#headBox
+}
+
+
+
+// 별 배경 ---
+#starBox {
+	position: fixed; left: 0; top: 0; z-index: 90;
+	height: 200px;
+	width: 100%;
+	overflow: hidden;
+}
+
+#starBox .star {
+	background-size: auto 100%;
+	background-position: 50% 0;
+	background-repeat: repeat-x;
+	height: 200px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform: translate3d(0, 0, 0);
+	width: 200vw;
+}
+
+@keyframes twinkle {
+	from { opacity: .3; }
+	to { opacity: 1; }
+}
+
+@keyframes star-1 {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-689px, 0, 0); }
+}
+#starBox .star:nth-child(1) {
+	animation: twinkle 10s ease-in -5s infinite alternate, star-1 344s linear infinite;
+	background-image: url('http://imgur.com/9beLKl9.png');
+}
+
+@keyframes star-2 {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-699px, 0, 0); }
+}
+#starBox .star:nth-child(2) {
+	animation: twinkle 3s ease-in -3s infinite alternate, star-2 349s linear infinite;
+	background-image: url('http://imgur.com/46MRYFa.png');
+}
+
+@keyframes star-3 {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-699px, 0, 0); }
+}
+#starBox .star:nth-child(3) {
+	animation: twinkle 3.5s ease-in infinite alternate, star-3 349s linear infinite;
+	background-image: url('http://imgur.com/46MRYFa.png');
+}
+
+@keyframes star-4 {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-480px, 0, 0); }
+}
+#starBox .star:nth-child(4) {
+	animation: twinkle 4s ease-in -2s infinite alternate, star-4 240s linear infinite;
+	background-image: url('http://imgur.com/BqkETyl.png');
+}
+
+@keyframes star-5 {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-486px, 0, 0); }
+}
+#starBox .star:nth-child(5) {
+	animation: twinkle 5.5s ease-in infinite alternate, star-5 243s linear infinite;
+	background-image: url('http://imgur.com/x1GB77K.png');
+}
+
+@keyframes shooting-star {
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	25% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(-270px, 180px, 0);
+	}
+}
+
+#starBox:before {
+	animation: 500ms linear 3s shooting-star;
+	background-image: url('http://imgur.com/ilhrli3.png');
+	background-size: 72px 50px;
+	content: ' ';
+	height: 50px;
+	left: 80%;
+	position: absolute;
+	top: -50px;
+	width: 72px;
+	z-index: 100;
+}
+
+
+//  이미지 --------------
+#viewBox {
+	position: fixed; top:0; left:0; z-index:10;
+	width: 100%; height: 100%;
+	background-color: nth($wireColor,3);
+	> div {
+		position:absolute; top: 0; left:0;
+		width: 100%; height: 100%;
+	}
+	//궁 ---viewImg.eq(0)
+	.view_01 {
+		@include Img($i:'view_01.png');
+	}
+		//달 --viewImg.eq(1)
+	.view_02 {
+		// bottom: -100%;
+		// opacity:0;
+		@include Img($i:'view_02.png',$p:50% 100%,$s:100% auto);
+	}
+		//사람 --viewImg.eq(2)
+	.view_03 {
+		@include Img($i:'view_03.png',$p:50% 100%);
+		opacity:0;
+	}
+	
+		//오른쪽 안개 ---viewImg.eq(3)
+	.view_04 {
+		@include Img($i:'view_fog_01.png',$s:100% auto);
+		animation: fogRight 8s infinite alternate ease;
+	}
+	@keyframes fogRight {
+		0% {transform:translateX(0)}
+		20%{opacity: 0.8;}
+		100% {transform:translateX(50px)}
+	}
+		//왼쪽 안개 ---viewImg.eq(4)
+	.view_05 {
+		@include Img($i:'view_fog_02.png',$s:100% auto);
+		animation: fogLeft 9s infinite alternate ease;
+	}
+	@keyframes fogLeft {
+		0% {transform:translateX(0)}
+		20%{opacity: 0.6;}
+		30%{opacity: 0.7;}
+		90%{opacity: 0.8;}
+		100% {transform:translateX(-80px)}
+	}
+		//달빛정담 ---viewImg.eq(5)
+	.view_06 {
+		top: 50%; 
+		left: 0; right:0; 
+		z-index: 100;
+		margin:auto; margin-top: -150px;
+		width: 50%; height: 50%;
+		transition: all 100ms ease-out;
+		@include Img($i:'view_04_crop.png',$s:80% auto);
+		// animation: title 10s 5 alternate linear;
+	}
+	@keyframes title {
+		0% {transform:translateX(10px); opacity:1}
+		20% {opacity:0.5}
+		50% {opacity:0.7}
+		70% {opacity:0.5}
+		100% {transform:translateX(-10px); opacity:1}
+	}
+		//화성행궁 야간개장 ---viewImg.eq(6)
+	.view_07 {
+		// display: none;
+		@include Img($i:'view_05.png',$s:100% auto);
+	}
+	
+
+	//end-#viewBox
+}
+
+
+
+// 콘텐츠 박스
+#contentBox {
+	position: relative; z-index:0;
+	width: 100%; height: auto;
+	padding-top: 5500px;
+	// background-image:linear-gradient(#000,#fff);
+	background-color: $black;
+	
+	.cont_area {
+		width:70%; height:auto;
+		margin:auto; 
+		padding-top: 150px;
+	}
+	h2 {
+		position: relative;
+		float:left;
+		width: 20%; height: 100%;
+		margin-right:5%;
+		font-size: 2rem;
+		color:$brown;
+	}
+	h2:before{
+		content: ""; 
+		position: absolute; top: -10px; left:0;
+		width: 50px; height: 4px;
+		background-color: $brown;
+	}
+	.text_area{
+		float:right;
+		width: 75%; height: 200px;
+		p{ 
+			font-size: 1rem;
+			color: $black;
+			>strong {
+				font-size: 1.2rem; margin-bottom: 20px;
+				font-weight: bold;
+			}
+		}
+	}
+	.table_area {
+		float:right; 
+		width: 75%; height: auto;
+	}
+
+	.common_table {
+		width: 100%; height: auto;
+		border-top: 2px solid $brown2;
+		border-bottom: 2px solid $brown2;
+		box-sizing: border-box;
+		color: $textGray;
+		background-color:$lightGray;
+		
+		>dt {
+			float: left;
+			width: 20%; min-width: 125px; height: auto;
+			padding: 15px 20px; box-sizing: border-box;
+			// border-bottom: 2px solid $brown2;
+			font-weight: bold;
+			font-size: 1rem;
+		}
+		
+		>dd {
+			float: left;
+			width: 80%; height: auto; min-height: 30px;
+			// border-bottom: 2px solid $brown2;
+			padding: 15px 25px; box-sizing: border-box;
+			font-size: 1rem;
+			background-color:$white;
+				>ul {width: 100%; height: auto; padding-left: 25px; box-sizing: border-box;}
+				>ul li {	position: relative;		}
+				>ul li:before {
+					content: ""; 
+					position: absolute; top: 9px; left:-20px;
+					width: 6px; height: 6px;
+					background-color:$brown2;
+				}
+		}	
+	}
+}
+
+
+#reGuide {
+	width: 100%; height: 800px;	
+	background-color:#fff;
+}
+
+#guide {
+	width: 100%; height: 700px;
+	background-color:#fff;
+
+	dd >a {
+		display: inline-block; width:12px; height: 16px;
+		width: 15px; height: 15px;
+		margin: 0 3px;
+		>i {  width: 100%; height: 100%; color:#fa3; }
+	}
+}
+
+#fee {
+	width: 100%; height: 500px;
+	background-color:#fff;
+	
+	.fee_table_01 {
+		width: 100%; height: auto;
+		border-top: 2px solid $brown2;
+		border-bottom: 2px solid $brown2;
+		box-sizing: border-box;
+		color: $textGray;
+		text-align: center;
+	
+		
+		>dt ul {width: 100%; height:auto;}
+		>dt ul li {
+			float:left;
+			width: 25%; height: 60px;
+			line-height: 60px;
+			border-bottom: 2px solid $brown2;
+			font-weight: bold;
+			background-color:$lightGray;
+		}
+	}
+
+	.fee_table_02 {
+		>dt {
+			float: left;
+			width: 25%;
+			>ul {width: 100%; height: auto;}
+			>ul li {
+				width: 100%; height: 60px;
+				line-height: 60px;
+				font-weight: bold;
+				background-color:$lightGray;
+			}
+		}
+		
+		>dd {
+			float: left;
+			width: 75%;
+			>ul {width: 100%; height: auto;}
+			>ul li{
+				float: left;
+				width: 33.333333%; height: 60px;
+				line-height: 60px;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+// footer
+#footBox {
+	width: 100%; height: 100px;
+	background-color: $black;
+}

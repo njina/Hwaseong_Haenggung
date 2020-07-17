@@ -1,0 +1,74 @@
+// _mixin.css
+// minxin은 형태를 미리 만들어놓고 불러오는 형태이다.
+// 경로는 변환된 css 기준
+
+
+$url :  '../../img/';
+@mixin Img($i, $r:no-repeat, $p:50% 50%, $s:cover) {
+	background-image:url($url + $i);
+	background-repeat:$r;
+	background-position: $p;
+	background-size: $s;
+}
+// $변수 : 기본으로 적용한 값
+
+@mixin Size( $s, $h ){
+	$size : $s / 16;
+	$hSize : $h / 16;
+
+	width: $s + px ;
+	width: $size + rem;
+	height: $h + px;
+	height: $hSize + vw;
+}
+
+@mixin Con(){
+	display: block;
+	>span {
+		opacity: 0.5;
+		@content;
+	}
+}
+
+// @content : 기재하면 기재하는대로 내용이 들어가는 것.
+
+$devicewidth : (
+	mob: 640,
+	tap: 1024,
+	laptop: 1400,
+);
+
+@mixin Mob(){
+	@media screen and (max-width: map-get($devicewidth, mob)){
+		@content;
+	}
+}
+
+@mixin Tab(){
+	@media screen and (min-width: map-get($devicewidth, mob)+1) and (max-width: map-get($devicewidth, tap)){
+		@content;
+	}
+}
+@mixin Laptop(){
+	@media screen and (min-width: 1025px) and (max-width: 1400px){
+		@content;
+	}
+}
+@mixin PcFull(){
+	@media screen and (min-width: 1401px){
+		@content;
+	}
+}
+
+@mixin myDevics($s){
+	@media all and (max-width:$s + px){
+		@content;
+	}
+}
+
+
+@function myFn($s, $d){
+	$n : $s / map-get($devicewidth,$d) * 100;
+	@return $n + vw;
+
+}

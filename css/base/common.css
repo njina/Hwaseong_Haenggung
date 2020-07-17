@@ -1,0 +1,8 @@
+/* common.css */
+
+/* 폰트 */
+.font {font-family: 'Noto Sans KR', sans-serif;}
+
+.hidden_wrap span,
+.hidden {display: block; position: absolute; z-index: -1; width: 0; height: 0; overflow: hidden;}
+.clearfix:after, .clearfix::after {content: " "; display: block; clear: both;} /*content 큰 따옴표 안에 띄어쓰기 한칸 반드시*/
